@@ -11,7 +11,7 @@ app.set('view engine', 'hbs');
 app.use((req, res, next) => {
     let now = new Date().toString();
     let log = `${now}: ${req.method} ${req.url}`;
-    console.log(log);
+    // console.log(log);
     fs.appendFile('server.log', log + '\n', (err) => {
         if (err) {
             console.log('Unable to append server.log')
@@ -52,6 +52,12 @@ app.get('/bad', (req, res) => {
     res.send({
         errorMessage: 'Unable to handle request'
     })
+});
+
+app.get('/project', (req, res) => {
+   res.render('project.hbs', {
+       pageTitle: 'Portfolio Page'
+   })
 });
 
 app.listen(port, () => {
